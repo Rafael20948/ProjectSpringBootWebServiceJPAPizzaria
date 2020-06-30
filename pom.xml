@@ -12,8 +12,8 @@
 	<groupId>com.coursejava</groupId>
 	<artifactId>course</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>course</name>
-	<description>Course SpringBoot</description>
+	<name>ProjectPizzaria</name>
+	<description>ProjectSpringBootPizzaria</description>
 
 	<properties>
 		<java.version>11</java.version>

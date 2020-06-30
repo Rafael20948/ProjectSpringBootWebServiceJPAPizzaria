@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.project_java.demo.entities.Cliente;
+import com.project_java.demo.entities.Fornada;
 import com.project_java.demo.entities.Ingrediente;
 import com.project_java.demo.entities.Pedido;
 import com.project_java.demo.entities.PizzaPedida;
@@ -81,6 +82,11 @@ public class TestConfig implements CommandLineRunner {
 		
 		pizzaPedidaRepository.saveAll(Arrays.asList(pp1,pp2,pp3));
 		
+		Fornada f1 = new Fornada(null, 12 , 15 , ped1);
+		Fornada f2 = new Fornada(null, 8 , 25 , ped1);
+		ped1.setFornada(f1);
+
+		pedidoRepository.save(ped1);
 		
 	
 	

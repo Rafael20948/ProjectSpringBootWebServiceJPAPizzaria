@@ -6,7 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_fornada")
@@ -17,17 +21,23 @@ public class Fornada implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Double numeroPizza;
-	private Double numeroFornada;
+	private Integer numeroDePizzas;
+	private Integer numeroFornada;
+	
+	@JsonIgnore
+	@OneToOne
+	@MapsId
+	private Pedido pedido;
 	
 	public Fornada() {
 
 	}
 
-	public Fornada(Long id, Double numeroPizza, Double numeroFornada) {
+	public Fornada(Long id, Integer numeroDePizzas, Integer numeroFornada, Pedido pedido) {
 		this.id = id;
-		this.numeroPizza = numeroPizza;
+		this.numeroDePizzas = numeroDePizzas;
 		this.numeroFornada = numeroFornada;
+		this.pedido = pedido;
 	}
 
 	public Long getId() {
@@ -38,20 +48,28 @@ public class Fornada implements Serializable{
 		this.id = id;
 	}
 
-	public Double getNumeroPizza() {
-		return numeroPizza;
+	public Integer getnumeroDePizzas() {
+		return numeroDePizzas;
 	}
 
-	public void setNumeroPizza(Double numeroPizza) {
-		this.numeroPizza = numeroPizza;
+	public void setnumeroDePizzas(Integer numeroDePizzas) {
+		this.numeroDePizzas = numeroDePizzas;
 	}
 
-	public Double getNumeroFornada() {
+	public Integer getNumeroFornada() {
 		return numeroFornada;
 	}
 
-	public void setNumeroFornada(Double numeroFornada) {
+	public void setNumeroFornada(Integer numeroFornada) {
 		this.numeroFornada = numeroFornada;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	@Override

@@ -3,12 +3,14 @@ package com.project_java.demo.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -28,10 +30,12 @@ public class Pedido implements Serializable{
 	
 	private Integer pedidoStatus;
 	
-	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
+	
+	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
+	private Fornada fornada;
 	
 	public Pedido() {
 		
@@ -40,7 +44,7 @@ public class Pedido implements Serializable{
 	public Pedido(Long id, Instant horario, PedidoStatus pedidoStatus, Cliente cliente) {
 		this.id = id;
 		this.horario = horario;
-		setOrderPedido(pedidoStatus);
+		setPedidoStatus(pedidoStatus);
 		this.cliente = cliente;
 	}
 	
@@ -60,11 +64,11 @@ public class Pedido implements Serializable{
 		this.horario = horario;
 	}
 
-	public Integer getOrderPedido() {
+	public Integer getPedidoStatus() {
 		return pedidoStatus;
 	}
 
-	public void setOrderPedido(PedidoStatus orderPedido) {
+	public void setPedidoStatus(PedidoStatus orderPedido) {
 		if (orderPedido != null) {
 			this.pedidoStatus = orderPedido.getCode();
 		}
@@ -78,6 +82,14 @@ public class Pedido implements Serializable{
 		this.cliente = cliente;
 	}
 	
+	public Fornada getFornada() {
+		return fornada;
+	}
+
+	public void setFornada(Fornada fornada) {
+		this.fornada = fornada;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

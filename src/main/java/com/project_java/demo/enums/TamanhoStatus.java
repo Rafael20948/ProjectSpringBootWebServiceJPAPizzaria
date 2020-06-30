@@ -1,14 +1,16 @@
 package com.project_java.demo.enums;
 
-public enum OrderPedido {
+public enum TamanhoStatus {
 
-	MAXIMA(1),
+	PEQUENA(1),
 	MEDIA(2),
-	MINIMA(3);
+	GRANDE(3),
+	SUPER_GRANDE(4);
+	
 	
 	private int code;
 	
-	private OrderPedido(int code) {
+	private TamanhoStatus(int code) {
 		this.code = code;
 	}
 	
@@ -16,8 +18,8 @@ public enum OrderPedido {
 		return code;
 	}
 	
-	public static OrderPedido valueOf(int code) {
-		for (OrderPedido value : OrderPedido.values()) {
+	public static TamanhoStatus valueOf(int code) {
+		for (TamanhoStatus value : TamanhoStatus.values()) {
 			if (value.getCode() == code) {
 				return value;
 			}

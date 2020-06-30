@@ -10,9 +10,14 @@ import org.springframework.context.annotation.Profile;
 
 import com.project_java.demo.entities.Cliente;
 import com.project_java.demo.entities.Pedido;
-import com.project_java.demo.enums.OrderPedido;
+import com.project_java.demo.entities.PizzaPedida;
+import com.project_java.demo.entities.Tamanho;
+import com.project_java.demo.enums.PedidoStatus;
+import com.project_java.demo.enums.TamanhoStatus;
 import com.project_java.demo.repositories.ClienteRepository;
 import com.project_java.demo.repositories.PedidoRepository;
+import com.project_java.demo.repositories.PizzaPedidaRepository;
+import com.project_java.demo.repositories.TamanhoRepository;
 
 @Configuration
 	@Profile("test")
@@ -24,6 +29,12 @@ import com.project_java.demo.repositories.PedidoRepository;
 		@Autowired
 		private PedidoRepository pedidoRepository;
 		
+		@Autowired
+		private TamanhoRepository tamanhoRepository;
+		
+		@Autowired
+		private PizzaPedidaRepository pizzaPedidaRepository;
+		
 		@Override
 		public void run(String... args) throws Exception {
 
@@ -34,13 +45,22 @@ import com.project_java.demo.repositories.PedidoRepository;
 			
 			clienteRepository.saveAll(Arrays.asList(cli1,cli2,cli3));
 			
-			Pedido ped1 = new Pedido(null, Instant.parse("2019-06-20T19:53:07Z"), OrderPedido.MEDIA, cli1);
-			Pedido ped2 = new Pedido(null, Instant.parse("2014-12-20T12:35:02Z"), OrderPedido.MAXIMA, cli2);
-			Pedido ped3 = new Pedido(null, Instant.parse("2013-04-20T14:23:17Z"), OrderPedido.MINIMA, cli3);
+			Pedido ped1 = new Pedido(null, Instant.parse("2019-06-20T19:53:07Z"), PedidoStatus.MEDIA, cli1);
+			Pedido ped2 = new Pedido(null, Instant.parse("2014-12-20T12:35:02Z"), PedidoStatus.MAXIMA, cli2);
+			Pedido ped3 = new Pedido(null, Instant.parse("2013-04-20T14:23:17Z"), PedidoStatus.MINIMA, cli3);
 			
 			pedidoRepository.saveAll(Arrays.asList(ped1,ped2,ped3));
 			
-
+			Tamanho tam1 = new Tamanho(null, 20.00, TamanhoStatus.GRANDE);
+			Tamanho tam2 = new Tamanho(null, 50.00, TamanhoStatus.MEDIA);
+			Tamanho tam3 = new Tamanho(null, 70.00, TamanhoStatus.PEQUENA);
+		
+			tamanhoRepository.saveAll(Arrays.asList(tam1,tam2,tam3));
+			
+			PizzaPedida pp1 = new PizzaPedida(null, 2, tam1);
+			PizzaPedida pp2 = new PizzaPedida(null, 1, tam2);
+			PizzaPedida pp3 = new PizzaPedida(null, 4, tam3);
+			
+			pizzaPedidaRepository.saveAll(Arrays.asList(pp1, pp2, pp3));
 		}
-	
 }

@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.project_java.demo.enums.OrderPedido;
+import com.project_java.demo.enums.PedidoStatus;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -26,7 +26,7 @@ public class Pedido implements Serializable{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant horario;
 	
-	private Integer orderPedido;
+	private Integer pedidoStatus;
 	
 	
 	@ManyToOne
@@ -37,10 +37,10 @@ public class Pedido implements Serializable{
 		
 	}
 
-	public Pedido(Long id, Instant horario, OrderPedido orderPedido, Cliente cliente) {
+	public Pedido(Long id, Instant horario, PedidoStatus pedidoStatus, Cliente cliente) {
 		this.id = id;
 		this.horario = horario;
-		setOrderPedido(orderPedido);
+		setOrderPedido(pedidoStatus);
 		this.cliente = cliente;
 	}
 	
@@ -61,12 +61,12 @@ public class Pedido implements Serializable{
 	}
 
 	public Integer getOrderPedido() {
-		return orderPedido;
+		return pedidoStatus;
 	}
 
-	public void setOrderPedido(OrderPedido orderPedido) {
+	public void setOrderPedido(PedidoStatus orderPedido) {
 		if (orderPedido != null) {
-			this.orderPedido = orderPedido.getCode();
+			this.pedidoStatus = orderPedido.getCode();
 		}
 	}
 	

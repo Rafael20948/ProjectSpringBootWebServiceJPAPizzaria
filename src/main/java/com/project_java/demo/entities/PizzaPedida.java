@@ -1,12 +1,16 @@
 package com.project_java.demo.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -25,6 +29,10 @@ public class PizzaPedida implements Serializable {
 	@JoinColumn(name = "tamanho_id")
 	private Tamanho tamanho;
 	
+	@ManyToMany
+	@JoinTable(name = "tb_pizzaPedida_ingrediente", joinColumns = @JoinColumn(name = "pizzaPedida_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
+	private Set<Ingrediente> ingredientes = new HashSet<>();
+
 	public PizzaPedida() {
 	
 	}
@@ -57,6 +65,10 @@ public class PizzaPedida implements Serializable {
 
 	public void setTamanho(Tamanho tamanho) {
 		this.tamanho = tamanho;
+	}
+	
+	public Set<Ingrediente> getIngredientes() {
+		return ingredientes;
 	}
 
 	@Override

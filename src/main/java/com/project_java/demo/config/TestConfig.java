@@ -73,6 +73,15 @@ public class TestConfig implements CommandLineRunner {
 		
 		ingredienteRepository.saveAll(Arrays.asList(ig1, ig2, ig3));
 		
+		pp1.getIngredientes().add(ig1);
+		pp2.getIngredientes().add(ig2);
+		pp2.getIngredientes().add(ig3);
+		pp2.getIngredientes().add(ig3);
+		pp3.getIngredientes().add(ig1);
+		
+		pizzaPedidaRepository.saveAll(Arrays.asList(pp1,pp2,pp3));
+		
+		
 	
 	
 	

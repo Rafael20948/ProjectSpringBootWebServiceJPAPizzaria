@@ -13,7 +13,7 @@ import com.project_java.demo.entities.Cliente;
 import com.project_java.demo.service.ClienteService;
 
 	@RestController
-	@RequestMapping(value = "/Clientes")
+	@RequestMapping(value = "/clientes")
 	public class ClienteResource {
 		
 		@Autowired

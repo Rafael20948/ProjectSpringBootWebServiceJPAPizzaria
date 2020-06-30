@@ -1,15 +1,20 @@
 package com.project_java.demo.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "tb_client")
+@Table(name = "tb_cliente")
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -25,6 +30,10 @@ public class Cliente implements Serializable{
 	public Cliente() {
 		
 	}
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente(Long id, String name, Integer telefone, String endereco, String login, String senha) {
 		this.id = id;
@@ -81,6 +90,10 @@ public class Cliente implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
 	}
 
 	@Override

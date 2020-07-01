@@ -29,6 +29,14 @@ public class PizzaPedida implements Serializable {
 	@JoinColumn(name = "tamanho_id")
 	private Tamanho tamanho;
 	
+	@ManyToOne
+	@JoinColumn(name = "pizza_id")
+	private Pizza pizza;
+	
+	@ManyToOne
+	@JoinColumn(name = "pedido_id")
+	private Pedido pedido;
+	
 	@ManyToMany
 	@JoinTable(name = "tb_pizzaPedida_ingrediente", joinColumns = @JoinColumn(name = "pizzaPedida_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
 	private Set<Ingrediente> ingredientes = new HashSet<>();
@@ -37,10 +45,12 @@ public class PizzaPedida implements Serializable {
 	
 	}
 
-	public PizzaPedida(Long id, Integer quantidade, Tamanho tamanho) {
+	public PizzaPedida(Long id, Integer quantidade, Tamanho tamanho, Pizza pizza, Pedido pedido) {
 		this.id = id;
 		this.quantidade = quantidade;
 		this.tamanho = tamanho;
+		this.pizza = pizza;
+		this.pedido = pedido;
 	}
 
 	public Long getId() {
@@ -65,6 +75,22 @@ public class PizzaPedida implements Serializable {
 
 	public void setTamanho(Tamanho tamanho) {
 		this.tamanho = tamanho;
+	}
+	
+	public Pizza getPizza() {
+		return pizza;
+	}
+
+	public void setPizza(Pizza pizza) {
+		this.pizza = pizza;
+	}
+	
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 	
 	public Set<Ingrediente> getIngredientes() {

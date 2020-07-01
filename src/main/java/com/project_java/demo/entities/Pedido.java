@@ -37,15 +37,20 @@ public class Pedido implements Serializable{
 	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private Fornada fornada;
 	
+	@ManyToOne
+	@JoinColumn(name = "bebida_id")
+	private Bebida bebida;
+	
 	public Pedido() {
 		
 	}
 
-	public Pedido(Long id, Instant horario, PedidoStatus pedidoStatus, Cliente cliente) {
+	public Pedido(Long id, Instant horario, PedidoStatus pedidoStatus, Cliente cliente,Bebida bebida) {
 		this.id = id;
 		this.horario = horario;
-		setPedidoStatus(pedidoStatus);
+		setPedidoStatus(pedidoStatus);	
 		this.cliente = cliente;
+		this.bebida = bebida;
 	}
 	
 	public Long getId() {
@@ -88,6 +93,14 @@ public class Pedido implements Serializable{
 
 	public void setFornada(Fornada fornada) {
 		this.fornada = fornada;
+	}
+	
+	public Bebida getBebida() {
+		return bebida;
+	}
+
+	public void setBebida(Bebida bebida) {
+		this.bebida = bebida;
 	}
 
 	@Override
